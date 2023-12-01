@@ -22,9 +22,10 @@ def main(data: str) -> int:
     return result
 
 
-filename = 'inputdatapart1.txt'
-arrayofdata = datafy(filename)
-total = 0
-for i in arrayofdata:
-    total += main(i)
-print(total)
+if __name__ == '__main__':
+    filename = 'inputdatapart1.txt'
+    arrayofdata = datafy(filename)
+    total = 0
+    for i in arrayofdata:
+        total += main(i)
+    print(total)
