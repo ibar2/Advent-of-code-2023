@@ -1,34 +1,26 @@
 import re
-from part1 import main
 
 
 ahashmaphh = {'one': 1, 'two': 2, 'three': 3, 'four': 4,
               'five': 5, 'six': 6, 'seven': 7, 'eight': 8,
-              'nine': 9, }
+              'nine': 9,     '1': 1, '2': 2, '3': 3, '4': 4,
+              '5': 5, '6': 6, '7': 7, '8': 8,  '9': 9}
 
 
 def mapper(match):
-    return str(ahashmaphh[match.group(0)])
+    return int(ahashmaphh[match])
 
 
-def datafy(filename):
-    newerarray = []
-    pattern = r'(one|two|three|four|five|six|seven|eight|nine)'
+def main(filename):
+    total = 0
+    pattern = "(?=([0-9]|one|two|three|four|five|six|seven|eight|nine))"
     with open(filename, 'r+') as f:
         lines = f.readlines()
         for line in lines:
-            data = re.sub(pattern, mapper, line)
-            newerarray.append(data)
-    return newerarray
+            data = re.findall(pattern, line)
+            total += int(str(mapper(data[0])) + str(mapper(data[-1])))
+    return total
 
 
-filename = 'inputdatapart2.txt'
-reformedData = datafy(filename)
-total = 0
-# pattern = r'(one|two|three|four|five|six|seven|eight|nine)'
-# data = re.sub(pattern, mapper, 'plckgsixeight6eight95bnrfonetwonej')
-# print(main(data))
-print(len(reformedData))
-for i in reformedData:
-    total += main(i)
-print(total)
+filename = 'input.txt'
+print(main(filename))
